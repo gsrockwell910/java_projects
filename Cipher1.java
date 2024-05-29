@@ -17,29 +17,13 @@ public class Cipher1 implements Crypto
 
    public String encrypt(String str)
    {
-     final int ASCII_START = 32,
-               ASCII_END = 127,
-               CONV_FACT = 1;  
-      
       char[] chars = str.toCharArray();
       
       str = "";
       
-      //test
       for(char c : chars)
       {
-         //int temp = 0;
          c += shuffle;
-         
-         if(c <= ASCII_START) //&& c >= ASCII_END)
-         {
-            c += ASCII_END - ASCII_START + CONV_FACT;
-         }
-         else if(c >= ASCII_END)
-         {
-            c = (char)((c - ASCII_START + shuffle) % (ASCII_END - ASCII_START + CONV_FACT) + ASCII_START);
-         }
-         //reassemble string
          str += c;
       }
       
@@ -47,7 +31,18 @@ public class Cipher1 implements Crypto
    }
    
    public String decrypt(String str)
-   {
+   {  
+   
+      char[] chars = str.toCharArray();
+
+      str = "";
+
+      for (char c : chars)
+      {
+         c -= shuffle;
+         str += c; // Reassemble string
+        
+      }
       return str;
    }
 }
