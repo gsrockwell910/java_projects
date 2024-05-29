@@ -21,8 +21,10 @@ public class Cipher1Demo
       
       Cipher1 cipher = new Cipher1(shuffle);
       encryptedString = cipher.encrypt(userString);
+      decryptedString = cipher.decrypt(encryptedString);
       
       System.out.print("\nOriginal String: " + userString);
-      System.out.print("\nEncrypted String: " +  encryptedString); 
+      System.out.print("\nEncrypted String: " +  encryptedString);
+      System.out.print("\nDecrypted String: " + decryptedString); 
    }
 }
