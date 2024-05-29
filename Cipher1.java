@@ -3,70 +3,44 @@ import java.util.*;
 
 public class Cipher1 implements Crypto
 {
-   private ArrayList<Character> oriCharList;
-   private ArrayList<Character> newCharList;
    private int shuffle;
-   
-   public Cipher1(ArrayList<Character> list1, ArrayList<Character> list2, int shuff)
-   {
-      oriCharList = new ArrayList<Character>(list1);
-      newCharList = new ArrayList<Character>(list2);
-      shuffle = shuff;
-   }
    
    public Cipher1()
    {
-      oriCharList = new ArrayList<Character>();
-      newCharList = new ArrayList<Character>();
       shuffle = 0;
    }
    
    public Cipher1(int shuff)
    {
-      oriCharList = new ArrayList<Character>();
-      newCharList = new ArrayList<Character>();
       shuffle = shuff;
    }
 
-
-   
    public String encrypt(String str)
    {
      final int ASCII_START = 32,
-               ASCII_END = 127;  
-               
-     int index = 0; 
+               ASCII_END = 127,
+               CONV_FACT = 1;  
       
-      //split string and add to arraylist
-      for(int i = 0; i < str.length(); i++)
-      {
-         oriCharList.add( str.charAt(i) );
-      }
+      char[] chars = str.toCharArray();
       
       str = "";
       
       //test
-      for(char c : oriCharList)
+      for(char c : chars)
       {
+         //int temp = 0;
          c += shuffle;
          
-         if(c >= ASCII_END)
+         if(c <= ASCII_START) //&& c >= ASCII_END)
          {
-            c -= (ASCII_END - ASCII_START);
-            c += shuffle;
+            c += ASCII_END - ASCII_START + CONV_FACT;
          }
-         else if(c <= ASCII_START)
+         else if(c >= ASCII_END)
          {
-            c += (ASCII_END - ASCII_START);
-            c -= shuffle;
+            c = (char)((c - ASCII_START + shuffle) % (ASCII_END - ASCII_START + CONV_FACT) + ASCII_START);
          }
-         newCharList.add(c);
-      }
-      
-      //test
-      for(int i = 0; i < newCharList.size(); i++)
-      {
-         str += newCharList.get(i);
+         //reassemble string
+         str += c;
       }
       
       return str;
