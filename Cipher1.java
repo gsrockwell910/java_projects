@@ -1,6 +1,3 @@
-//for user input and ArrayList
-import java.util.*;
-
 public class Cipher1 implements Crypto
 {
    private int shuffle;
