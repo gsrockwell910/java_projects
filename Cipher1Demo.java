@@ -18,6 +18,8 @@ public class Cipher1Demo
       
       System.out.print("Please enter a number: ");
       shuffle = keyboard.nextInt();
+
+      keyboard.close();
       
       Cipher1 cipher = new Cipher1(shuffle);
       encryptedString = cipher.encrypt(userString);
